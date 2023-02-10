@@ -10,17 +10,3 @@ public interface ClientMapper {
 
     Client toClient(LoanApplicationRequestDTO loanApplicationRequestDTO);
 }
-
-/*
-    private String firstName;
-
-    private String lastName;
-
-    private String middleName;
-
-
-    private LocalDate birthdate;
-
-    private String passportSeries;
-
-    private String passportNumber;*/

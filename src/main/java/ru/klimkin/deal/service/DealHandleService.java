@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface DealHandleService {
 
-    List<LoanOfferDTO> handleApplication(LoanApplicationRequestDTO request);
+    List<LoanOfferDTO> handleApplicationStage(LoanApplicationRequestDTO request);
 
-    void handleOffer(LoanOfferDTO loanOfferDTO);
+    void handleOfferStage(LoanOfferDTO loanOfferDTO);
 
-    void handleCalculation(FinishRegistrationRequestDTO finishRegistrationRequestDTO, Long applicationId);
+    void handleCalculationStage(FinishRegistrationRequestDTO finishRegistrationRequestDTO, Long applicationId);
 }

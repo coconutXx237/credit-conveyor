@@ -23,19 +23,18 @@ public class DealController {
 
     @PostMapping("/application")
     public List<LoanOfferDTO> getOffer(@RequestBody LoanApplicationRequestDTO loanApplicationRequestDTO) {
-        return dealHandleService.handleApplication(loanApplicationRequestDTO);
+        return dealHandleService.handleApplicationStage(loanApplicationRequestDTO);
     }
 
     @PutMapping("/offer")
     public void chooseOffer(@RequestBody LoanOfferDTO loanOfferDTO) {
-        System.out.println("------------------------------loanOfferDTO только ПОЛУЧИЛИ : " + loanOfferDTO);
-        dealHandleService.handleOffer(loanOfferDTO);
+        dealHandleService.handleOfferStage(loanOfferDTO);
     }
 
     @PutMapping("/calculate/{applicationId}")
     public void getCalculation(@RequestBody FinishRegistrationRequestDTO finishRegistrationRequestDTO,
                                @PathVariable("applicationId") Long applicationId) {
-        dealHandleService.handleCalculation(finishRegistrationRequestDTO, applicationId);
+        dealHandleService.handleCalculationStage(finishRegistrationRequestDTO, applicationId);
     }
 
 

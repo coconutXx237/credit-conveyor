@@ -1,9 +1,12 @@
 package ru.klimkin.deal.entity;
 
 import javax.persistence.*;
+
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 import ru.klimkin.deal.enums.Gender;
 import ru.klimkin.deal.enums.MaritalStatus;
 
@@ -13,6 +16,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "client")
 @NoArgsConstructor
+@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,23 +39,23 @@ public class Client {
     private String email;
 
     @Column(name = "gender")
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private Gender gender;
 
     @Column(name = "marital_status")
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private MaritalStatus maritalStatus;
 
     @Column(name = "dependent_amount")
     private Integer dependentAmount;
 
     @Type(type = "jsonb")
-    @Column(name = "passport_id", columnDefinition = "jsonb")
-    private Passport passportId;
+    @Column(name = "passport", columnDefinition = "jsonb")
+    private Passport passport;
 
     @Type(type = "jsonb")
-    @Column(name = "employment_id", columnDefinition = "jsonb")
-    private Employment employmentId;
+    @Column(name = "employment", columnDefinition = "jsonb")
+    private Employment employment;
 
     @Column(name = "account")
     private String account;

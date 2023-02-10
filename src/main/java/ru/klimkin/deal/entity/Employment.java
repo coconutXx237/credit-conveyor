@@ -1,8 +1,7 @@
 package ru.klimkin.deal.entity;
 
-import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
+import lombok.Builder;
 import lombok.Data;
-import org.hibernate.annotations.TypeDef;
 import ru.klimkin.deal.enums.EmploymentStatus;
 import ru.klimkin.deal.enums.Position;
 
@@ -10,10 +9,10 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Data
-@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
+@Builder
 public class Employment implements Serializable {
 
-    private Client client;
+    private Long employmentId;
 
     private EmploymentStatus employmentStatus;
 

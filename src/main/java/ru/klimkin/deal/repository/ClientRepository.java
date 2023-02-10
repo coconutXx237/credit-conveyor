@@ -6,6 +6,4 @@ import ru.klimkin.deal.entity.Client;
 
 @Repository
 public interface ClientRepository extends CrudRepository<Client, Long> {
-
-
 }

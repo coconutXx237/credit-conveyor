@@ -5,12 +5,17 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.klimkin.deal.dto.LoanApplicationRequestDTO;
 import ru.klimkin.deal.entity.Application;
+import ru.klimkin.deal.entity.StatusHistory;
+import ru.klimkin.deal.enums.ApplicationStatus;
+import ru.klimkin.deal.enums.ChangeType;
 import ru.klimkin.deal.repository.ApplicationRepository;
 import ru.klimkin.deal.service.ApplicationService;
 import ru.klimkin.deal.util.ApplicationNotFoundException;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -31,10 +36,8 @@ private final ApplicationRepository applicationRepository;
     }
 
     @Override
-    public Application findApplication(Long id) {
-        System.out.println("--------------------Long id : " + id);
-        System.out.println("--------------------foundApplication: " + applicationRepository.findById(id));
-        Optional<Application> foundApplication = applicationRepository.findById(id);
+    public Application findApplication(Long applicationId) {
+        Optional<Application> foundApplication = applicationRepository.findByApplicationId(applicationId);
         return foundApplication.orElseThrow(ApplicationNotFoundException::new);
     }
 
@@ -42,4 +45,27 @@ private final ApplicationRepository applicationRepository;
     public void updateApplication(Application updatedApplication) {
         applicationRepository.save(updatedApplication);
     }
+
+    @Override
+    public List<StatusHistory> updateStatusHistoryForOffer(Application application) {
+        List<StatusHistory> statusHistoryList = application.getStatusHistory();
+        statusHistoryList.add(StatusHistory.builder()
+                .status(ApplicationStatus.PREAPPROVAL)
+                .time(LocalDateTime.now())
+                .changeType(ChangeType.AUTOMATIC).build());
+
+        return statusHistoryList;
+    }
+
+    @Override
+    public List<StatusHistory> updateStatusHistoryForCalculation(Application application) {
+        List<StatusHistory> statusHistoryList = application.getStatusHistory();
+        statusHistoryList.add(StatusHistory.builder()
+                .status(ApplicationStatus.APPROVED)
+                .time(LocalDateTime.now())
+                .changeType(ChangeType.AUTOMATIC).build());
+
+        return statusHistoryList;
+    }
+
 }

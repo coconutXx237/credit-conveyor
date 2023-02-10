@@ -1,9 +1,12 @@
 package ru.klimkin.deal.entity;
 
 import javax.persistence.*;
+
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 import ru.klimkin.deal.dto.PaymentScheduleElementDTO;
 import ru.klimkin.deal.enums.CreditStatus;
 
@@ -14,6 +17,7 @@ import java.util.List;
 @Entity
 @Table(name = "credit")
 @NoArgsConstructor
+@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class Credit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,7 +49,7 @@ public class Credit {
     @Column(name = "salary_client")
     private boolean isSalaryClientEnabled;
 
-    @Column(name = "credit_tatus")
-    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "credit_status")
+    @Enumerated(EnumType.STRING)
     private CreditStatus creditStatus;
 }

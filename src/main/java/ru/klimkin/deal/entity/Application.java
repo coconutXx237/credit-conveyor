@@ -1,8 +1,10 @@
 package ru.klimkin.deal.entity;
 
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 import ru.klimkin.deal.dto.LoanOfferDTO;
 import ru.klimkin.deal.enums.ApplicationStatus;
 
@@ -14,6 +16,7 @@ import java.util.List;
 @Entity
 @Table(name = "application")
 @NoArgsConstructor
+@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class Application {
     @Id
     @Column(name = "application_id")
@@ -27,7 +30,7 @@ public class Application {
     private Long creditId;
 
     @Column(name = "status")
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private ApplicationStatus applicationStatus;
 
     @Column(name = "creation_date")

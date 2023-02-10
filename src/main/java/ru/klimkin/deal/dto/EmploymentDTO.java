@@ -1,14 +1,17 @@
 package ru.klimkin.deal.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import ru.klimkin.deal.enums.EmploymentStatus;
 import ru.klimkin.deal.enums.Position;
 
 import java.math.BigDecimal;
 
 @Data
-@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class EmploymentDTO {
 
     private EmploymentStatus employmentStatus;
@@ -23,4 +26,3 @@ public class EmploymentDTO {
 
     private Integer workExperienceCurrent;
 }
-
