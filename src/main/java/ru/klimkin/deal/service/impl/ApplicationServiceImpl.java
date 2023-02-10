@@ -14,31 +14,32 @@ import ru.klimkin.deal.util.ApplicationNotFoundException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class ApplicationServiceImpl implements ApplicationService {
 
-private final ApplicationRepository applicationRepository;
+    private final ApplicationRepository applicationRepository;
 
     @Override
     public Application createApplication(LoanApplicationRequestDTO request, Long clientId) {
         Application newApplication = new Application();
         newApplication.setClientId(clientId);
+        log.info("Added clientId={} into new application for client {} {}", clientId, request.getFirstName(), request.getLastName());
         newApplication.setCreationDate(LocalDate.now());
+        log.info("Added creationDate={} into new application for client {} {}", LocalDate.now(), request.getFirstName(), request.getLastName());
         newApplication.setStatusHistory(new ArrayList<>());
+        log.info("Added empty statusHistory into new application for client {} {}", request.getFirstName(), request.getLastName());
+
 
         return applicationRepository.save(newApplication);
     }
 
     @Override
     public Application findApplication(Long applicationId) {
-        Optional<Application> foundApplication = applicationRepository.findByApplicationId(applicationId);
-        return foundApplication.orElseThrow(ApplicationNotFoundException::new);
+        return applicationRepository.findByApplicationId(applicationId).orElseThrow(ApplicationNotFoundException::new);
     }
 
     @Override
@@ -48,23 +49,27 @@ private final ApplicationRepository applicationRepository;
 
     @Override
     public List<StatusHistory> updateStatusHistoryForOffer(Application application) {
+        log.info("Updating offerStage StatusHistory for applicationId={}", application.getApplicationId());
         List<StatusHistory> statusHistoryList = application.getStatusHistory();
         statusHistoryList.add(StatusHistory.builder()
                 .status(ApplicationStatus.PREAPPROVAL)
                 .time(LocalDateTime.now())
                 .changeType(ChangeType.AUTOMATIC).build());
-
+        log.info("ApplicationStatus set to {}, time set to {}, ChangeType set to {} for applicationId={}",
+                ApplicationStatus.PREAPPROVAL, LocalDateTime.now(), ChangeType.AUTOMATIC, application.getApplicationId());
         return statusHistoryList;
     }
 
     @Override
     public List<StatusHistory> updateStatusHistoryForCalculation(Application application) {
+        log.info("Updating calculationStage StatusHistory for applicationId={}", application.getApplicationId());
         List<StatusHistory> statusHistoryList = application.getStatusHistory();
         statusHistoryList.add(StatusHistory.builder()
                 .status(ApplicationStatus.APPROVED)
                 .time(LocalDateTime.now())
                 .changeType(ChangeType.AUTOMATIC).build());
-
+        log.info("ApplicationStatus set to {}, time set to {}, ChangeType set to {} for applicationId={}",
+                ApplicationStatus.APPROVED, LocalDateTime.now(), ChangeType.AUTOMATIC, application.getApplicationId());
         return statusHistoryList;
     }
 

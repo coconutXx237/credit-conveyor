@@ -36,8 +36,10 @@ public class CreditServiceImpl implements CreditService {
     @Override
     public CreditDTO getCalculation(FinishRegistrationRequestDTO finishRegistrationRequestDTO,
                                      Application application, Client client) {
-        return feignClientService.getCalculation(getScoringDataDTO(finishRegistrationRequestDTO, client,
-                application));
+        ScoringDataDTO scoringDataDTO = getScoringDataDTO(finishRegistrationRequestDTO, client, application);
+        log.info("Sending created ScoringDataDTO for clientId={} to MS credit-conveyor for scoring and calculation",
+                client.getClientId());
+        return feignClientService.getCalculation(scoringDataDTO);
     }
 
     private ScoringDataDTO getScoringDataDTO(FinishRegistrationRequestDTO finishRegistrationRequestDTO, Client client,
