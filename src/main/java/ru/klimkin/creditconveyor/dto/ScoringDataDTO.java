@@ -50,7 +50,7 @@ public class ScoringDataDTO {
 
     @Schema(description = "Applicant`s date of birth")
     @NotNull(message = "Birth date must be stated")
-    private LocalDate birthdate;
+    private LocalDate birthDate;
 
     @Schema(description = "Applicant`s passport series")
     @NotEmpty(message = "Passport series must be stated")

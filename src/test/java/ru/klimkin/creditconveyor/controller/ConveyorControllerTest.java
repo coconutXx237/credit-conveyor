@@ -82,7 +82,7 @@ class ConveyorControllerTest {
     private LoanApplicationRequestDTO getLoanApplicationRequestDTO() {
         return LoanApplicationRequestDTO.builder().amount(new BigDecimal("300000")).term(18)
                 .firstName("Ivan").lastName("Ivanov").middleName("Ivanovich").email("example@mail.ru")
-                .birthdate(LocalDate.of(1993, Month.DECEMBER, 3)).passportSeries("1234")
+                .birthDate(LocalDate.of(1993, Month.DECEMBER, 3)).passportSeries("1234")
                 .passportNumber("123456").build();
     }
 
@@ -94,7 +94,7 @@ class ConveyorControllerTest {
                 .lastName("Ivanov")
                 .middleName("Ivanovich")
                 .gender(Gender.MALE)
-                .birthdate(LocalDate.of(1994, Month.MARCH, 21))
+                .birthDate(LocalDate.of(1994, Month.MARCH, 21))
                 .passportSeries("1234")
                 .passportNumber("123123")
                 .passportIssueDate(LocalDate.of(2004, Month.JUNE, 16))

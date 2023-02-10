@@ -89,7 +89,7 @@ class CalculationServiceImplTest {
                 .lastName("Ivanov")
                 .middleName("Ivanovich")
                 .gender(Gender.MALE)
-                .birthdate(LocalDate.of(1994, Month.MARCH, 21))
+                .birthDate(LocalDate.of(1994, Month.MARCH, 21))
                 .passportSeries("1234")
                 .passportNumber("123123")
                 .passportIssueDate(LocalDate.of(2004, Month.JUNE, 16))

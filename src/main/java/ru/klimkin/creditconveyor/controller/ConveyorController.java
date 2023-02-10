@@ -36,6 +36,8 @@ public class ConveyorController {
     @PostMapping("/offers")
     public List<LoanOfferDTO> getOffer(@RequestBody @Valid LoanApplicationRequestDTO loanApplicationRequestDTO,
                                        BindingResult bindingResult) {
+
+        System.out.println("--------------------" + loanApplicationRequestDTO);
         if (bindingResult.hasErrors()) {
             StringBuilder errorMsg = new StringBuilder();
             List<FieldError> errors = bindingResult.getFieldErrors();

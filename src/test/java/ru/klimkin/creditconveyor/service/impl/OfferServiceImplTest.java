@@ -111,7 +111,7 @@ class OfferServiceImplTest {
                 .lastName("Ivanov")
                 .middleName("Ivanovich")
                 .email("example@mail.ru")
-                .birthdate(LocalDate.of(1993, Month.DECEMBER, 3))
+                .birthDate(LocalDate.of(1993, Month.DECEMBER, 3))
                 .passportSeries("1234")
                 .passportNumber("123456")
                 .build();

@@ -78,7 +78,7 @@ public class CalculationServiceImpl implements CalculationService {
 
         EmploymentDTO employmentDTO = scoringDataDTO.getEmployment();
         List<String> listOfScoringRefusals = new ArrayList<>();
-        long age = calculateAge(scoringDataDTO.getBirthdate());
+        long age = calculateAge(scoringDataDTO.getBirthDate());
         log.info("Age: " + age);
 
         if (scoringDataDTO.getIsInsuranceEnabled()) {
